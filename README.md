@@ -1,4 +1,4 @@
-# MEDTXT-NER
+# 日本語医療固有表現抽出器 (開発中)
 
 ## 概要
 
@@ -10,9 +10,10 @@
 from transformers import BertForTokenClassification, AutoModel, AutoTokenizer
 import mojimoji
 text = "サンプルテキスト"
+model_name = "daisaku-s/med_ner"
 with torch.inference_mode():
-    model = BertForTokenClassification.from_pretrained("daisaku-s/med_ner").eval()
-    tokenizer = AutoTokenizer.from_pretrained("daisaku-s/med_ner")
+    model = BertForTokenClassification.from_pretrained(model_name).eval()
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     idx2tag = model.config.id2label
     vecs = tokenizer(mojimoji.han_to_zen(text), 
                      padding=True, 
@@ -21,10 +22,25 @@ with torch.inference_mode():
     ner_logits = model(input_ids=vecs["input_ids"], 
                        attention_mask=vecs["attention_mask"])
     idx = torch.argmax(ner_logits.logits, dim=2).detach().cpu().numpy().tolist()[0]
+    token = [tokenizer.convert_ids_to_tokens(v) for v in vecs["input_ids"]][1:-1]
     pred_tag = [idx2tag[x] for x in idx][1:-1]
+    print(token, pred_tag)
+```
+
+```python
+from transformers import pipeline
+text = "サンプルテキスト"
+model_name = "daisaku-s/med_ner"
+ner = pipeline("ner", model=model_name)
+results = ner(text)
+print(results)
 ```
 
 ## 実験結果 (Micro-F1)
+
+5分割交差検証による内挿評価の結果になります。
+訓練データの20%を検証データとして使用し、100エポック学習させた中で検証データにおけるMicro-F1が最も高かった時のエポック時のモデルを用いてテストデータの評価を行いました。
+なお、検証データにおける最適なエポックの平均値で上記のモデルは学習しております。
 
 |Fold|RoBERTa|
 |:---|---:|
