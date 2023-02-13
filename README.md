@@ -2,7 +2,7 @@
 
 ## 概要
 
-ソーシャル・コンピューティング研究室より公開されている[MedTxt-CR](https://sociocom.naist.jp/medtxt/cr/)を用いて、alabniiより公開されている[RoBERTa](https://huggingface.co/alabnii/jmedroberta-base-sentencepiece-vocab50000)を固有表現抽出用にfine-tuningしたモデルです。
+ソーシャル・コンピューティング研究室さまより公開されている[MedTxt-CR](https://sociocom.naist.jp/medtxt/cr/)を用いて、alabniiさまより公開されている[RoBERTa](https://huggingface.co/alabnii/jmedroberta-base-sentencepiece-vocab50000)を固有表現抽出用にfine-tuningしたモデルです。
 
 ## 使い方
 
