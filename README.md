@@ -4,6 +4,16 @@
 
 ソーシャル・コンピューティング研究室さまより公開されている[MedTxt-CR](https://sociocom.naist.jp/medtxt/cr/)を用いて、alabniiさまより公開されている[RoBERTa](https://huggingface.co/alabnii/jmedroberta-base-sentencepiece-vocab50000)を固有表現抽出用にfine-tuningしたモデルです。
 
+
+## fine-tuning時のハイパーパラメータ
+
+- learning rate: 1e-5
+- batch size: 48
+- optimizer: AdamW
+- scheduler: linear
+- epochs: 67
+- max seq: 500
+
 ## 使い方
 
 ```python
@@ -54,4 +64,6 @@ print(results)
 ## 文献
 - [MedTxt-CR: 症例報告 (Case Reports) コーパス](https://sociocom.naist.jp/medtxt/cr/)
 - 杉本海人, 壹岐太一, 知田悠生, 金沢輝一, 相澤彰子, JMedRoBERTa: 日本語の医学論文にもとづいた事前
+
+## 免責事項
 
