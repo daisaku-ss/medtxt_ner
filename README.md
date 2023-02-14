@@ -19,6 +19,7 @@
 ```python
 from transformers import BertForTokenClassification, AutoModel, AutoTokenizer
 import mojimoji
+import torch
 text = "サンプルテキスト"
 model_name = "daisaku-s/med_ner"
 with torch.inference_mode():
@@ -32,9 +33,15 @@ with torch.inference_mode():
     ner_logits = model(input_ids=vecs["input_ids"], 
                        attention_mask=vecs["attention_mask"])
     idx = torch.argmax(ner_logits.logits, dim=2).detach().cpu().numpy().tolist()[0]
-    token = [tokenizer.convert_ids_to_tokens(v) for v in vecs["input_ids"]][1:-1]
+    token = [tokenizer.convert_ids_to_tokens(v) for v in vecs["input_ids"]][0][1:-1]
     pred_tag = [idx2tag[x] for x in idx][1:-1]
-    print(token, pred_tag)
+
+
+# IOB2をSPANに変換する
+from allennlp.data.dataset_readers.dataset_utils import span_utils
+spans = span_utils.bio_tags_to_spans(pred_tag)
+for span in spans:
+    print(token[span[1][0]: span[1][1]+1], span[0])
 ```
 
 ```python
