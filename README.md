@@ -38,13 +38,17 @@ with torch.inference_mode():
     idx = torch.argmax(ner_logits.logits, dim=2).detach().cpu().numpy().tolist()[0]
     token = [tokenizer.convert_ids_to_tokens(v) for v in vecs["input_ids"]][0][1:-1]
     pred_tag = [idx2tag[x] for x in idx][1:-1]
+```
 
 
-# IOB2をSPANに変換する
+得られたタグ系列をスパンに変換する処理
+```python
 from allennlp.data.dataset_readers.dataset_utils import span_utils
 spans = span_utils.bio_tags_to_spans(pred_tag)
 for span in spans:
-    print("Entity: {0} Tag: {1}".format("".join(token[span[1][0]: span[1][1]+1]), span[0]))
+    tag = span[0]
+    ent = "".join(token[span[1][0]: span[1][1]+1])
+    print("Entity: {0} Tag: {1}".format(ent, tag))
 ```
 
 ### 2
@@ -57,6 +61,8 @@ ner = pipeline("ner", model=model_name)
 results = ner(text)
 print(results)
 ```
+
+
 
 ## 実践的な使用例
 
