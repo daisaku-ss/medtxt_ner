@@ -41,7 +41,8 @@ with torch.inference_mode():
 ```
 
 
-得られたタグ系列をスパンに変換する処理
+固有表現とタグのペアで出力する処理
+
 ```python
 from allennlp.data.dataset_readers.dataset_utils import span_utils
 spans = span_utils.bio_tags_to_spans(pred_tag)
