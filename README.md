@@ -1,4 +1,4 @@
-# 日本語医療固有表現抽出器 (開発中)
+# 日本語医療固有表現抽出器
 
 ## 概要
 
@@ -44,7 +44,7 @@ with torch.inference_mode():
 from allennlp.data.dataset_readers.dataset_utils import span_utils
 spans = span_utils.bio_tags_to_spans(pred_tag)
 for span in spans:
-    print(token[span[1][0]: span[1][1]+1], span[0])
+    print("Entity: {0} Tag: {1}".format("".join(token[span[1][0]: span[1][1]+1]), span[0]))
 ```
 
 ### 2
@@ -81,7 +81,4 @@ print(results)
 
 ## 文献
 - [MedTxt-CR: 症例報告 (Case Reports) コーパス](https://sociocom.naist.jp/medtxt/cr/)
-- 杉本海人, 壹岐太一, 知田悠生, 金沢輝一, 相澤彰子, JMedRoBERTa: 日本語の医学論文にもとづいた事前
-
-## 免責事項
-
+- 杉本海人, 壹岐太一, 知田悠生, 金沢輝一, 相澤彰子, JMedRoBERTa: 日本語の医学論文にもとづいた事前学習済み言語モデルの構築と評価, 言語処理学会第29回年次大会, 2023.
