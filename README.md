@@ -13,7 +13,7 @@
 - epochs: 67
 - max seq: 500
 
-## 実行
+## 使用方法
 
 入力は文単位で出力はIOB2系列です。
 
@@ -58,7 +58,7 @@ results = ner(text)
 print(results)
 ```
 
-## 活用事例
+## 実践的な使用例
 
 ### 1
 
