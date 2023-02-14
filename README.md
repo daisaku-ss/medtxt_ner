@@ -4,6 +4,8 @@
 
 ソーシャル・コンピューティング研究室さまより公開されている[MedTxt-CR](https://sociocom.naist.jp/medtxt/cr/)を用いて、alabniiさまより公開されている[RoBERTa](https://huggingface.co/alabnii/jmedroberta-base-sentencepiece-vocab50000)を固有表現抽出用にfine-tuningしたモデルです。
 
+入力は1文で、出力はIOB2系列になります。
+
 
 ## fine-tuning時のハイパーパラメータ
 
@@ -52,6 +54,14 @@ ner = pipeline("ner", model=model_name)
 results = ner(text)
 print(results)
 ```
+
+## 活用事例
+
+
+### 1
+
+### 2
+
 
 ## 実験結果 (Micro-F1)
 
