@@ -16,7 +16,9 @@
 - epochs: 67
 - max seq: 500
 
-## 使い方
+## 実行
+
+### 1
 
 ```python
 from transformers import BertForTokenClassification, AutoModel, AutoTokenizer
@@ -45,6 +47,8 @@ spans = span_utils.bio_tags_to_spans(pred_tag)
 for span in spans:
     print(token[span[1][0]: span[1][1]+1], span[0])
 ```
+
+### 2
 
 ```python
 from transformers import pipeline
